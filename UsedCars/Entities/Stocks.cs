@@ -9,7 +9,7 @@ namespace UsedCarProject.Entities
     public class Stocks
     {
 
-        
+        [Required]
         public int StockId { get; set; }
 
         [Required]
