@@ -4,12 +4,12 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace UsedCarProject.Entities
+namespace Entities
 {
     public class Stocks
     {
 
-        
+        [Required]
         public int StockId { get; set; }
 
         [Required]
