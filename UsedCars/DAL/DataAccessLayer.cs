@@ -77,5 +77,7 @@ namespace DAL
             tag = param.Get<int>("v_tag");
             return tag;
         }
+
+
     }
 }

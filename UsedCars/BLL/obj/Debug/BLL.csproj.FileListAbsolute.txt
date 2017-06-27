@@ -4,3 +4,9 @@ C:\Users\snehal.dange\Documents\TeamGitProject\FirstCWProject\UsedCars\BLL\bin\B
 C:\Users\snehal.dange\Documents\TeamGitProject\FirstCWProject\UsedCars\BLL\obj\Debug\BLL.csprojResolveAssemblyReference.cache
 C:\Users\snehal.dange\Documents\TeamGitProject\FirstCWProject\UsedCars\BLL\obj\Debug\BLL.dll
 C:\Users\snehal.dange\Documents\TeamGitProject\FirstCWProject\UsedCars\BLL\obj\Debug\BLL.pdb
+S:\FirstCWProject\UsedCars\BLL\bin\BLL.dll.config
+S:\FirstCWProject\UsedCars\BLL\bin\BLL.dll
+S:\FirstCWProject\UsedCars\BLL\bin\BLL.pdb
+S:\FirstCWProject\UsedCars\BLL\obj\Debug\BLL.csprojResolveAssemblyReference.cache
+S:\FirstCWProject\UsedCars\BLL\obj\Debug\BLL.dll
+S:\FirstCWProject\UsedCars\BLL\obj\Debug\BLL.pdb
