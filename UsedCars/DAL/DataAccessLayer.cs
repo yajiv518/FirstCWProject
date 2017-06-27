@@ -15,7 +15,6 @@ namespace DAL
     public class DataAccessLayer:IDataAccess<Stocks>
     {
         private string connString = ConfigurationManager.ConnectionStrings["DatabaseConncet"].ConnectionString;
-
         public int Create(Stocks stock)
         {
             int newId;
@@ -78,6 +77,14 @@ namespace DAL
             return tag;
         }
 
-
+        public Stocks Read(int id)
+        {
+            Stocks stock;
+            using (IDbConnection conn = new MySqlConnection(connString))
+            {
+                stock=conn.Query<Stocks>("sp_UsedCarsGetData",new {carID=id},commandType:CommandType.StoredProcedure).AsList()[0];
+            }
+            return stock;
+        }
     }
 }
