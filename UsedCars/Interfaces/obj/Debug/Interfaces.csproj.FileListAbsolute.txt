@@ -1,0 +1,13 @@
+C:\Users\snehal.dange\Documents\TeamGitProject\FirstCWProject\UsedCars\Interfaces\bin\Interfaces.dll.config
+C:\Users\snehal.dange\Documents\TeamGitProject\FirstCWProject\UsedCars\Interfaces\bin\Interfaces.dll
+C:\Users\snehal.dange\Documents\TeamGitProject\FirstCWProject\UsedCars\Interfaces\bin\Interfaces.pdb
+C:\Users\snehal.dange\Documents\TeamGitProject\FirstCWProject\UsedCars\Interfaces\obj\Debug\Interfaces.dll
+C:\Users\snehal.dange\Documents\TeamGitProject\FirstCWProject\UsedCars\Interfaces\obj\Debug\Interfaces.pdb
+S:\FirstCWProject\UsedCars\Interfaces\bin\Interfaces.dll.config
+S:\FirstCWProject\UsedCars\Interfaces\bin\Interfaces.dll
+S:\FirstCWProject\UsedCars\Interfaces\bin\Interfaces.pdb
+S:\FirstCWProject\UsedCars\Interfaces\bin\Entities.dll
+S:\FirstCWProject\UsedCars\Interfaces\bin\Entities.pdb
+S:\FirstCWProject\UsedCars\Interfaces\obj\Debug\Interfaces.csprojResolveAssemblyReference.cache
+S:\FirstCWProject\UsedCars\Interfaces\obj\Debug\Interfaces.dll
+S:\FirstCWProject\UsedCars\Interfaces\obj\Debug\Interfaces.pdb

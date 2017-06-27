@@ -4,3 +4,8 @@ C:\Users\snehal.dange\Documents\TeamGitProject\FirstCWProject\UsedCars\Entities\
 C:\Users\snehal.dange\Documents\TeamGitProject\FirstCWProject\UsedCars\Entities\obj\Debug\Entities.csprojResolveAssemblyReference.cache
 C:\Users\snehal.dange\Documents\TeamGitProject\FirstCWProject\UsedCars\Entities\obj\Debug\Entities.dll
 C:\Users\snehal.dange\Documents\TeamGitProject\FirstCWProject\UsedCars\Entities\obj\Debug\Entities.pdb
+S:\FirstCWProject\UsedCars\Entities\bin\Entities.dll.config
+S:\FirstCWProject\UsedCars\Entities\bin\Entities.dll
+S:\FirstCWProject\UsedCars\Entities\bin\Entities.pdb
+S:\FirstCWProject\UsedCars\Entities\obj\Debug\Entities.dll
+S:\FirstCWProject\UsedCars\Entities\obj\Debug\Entities.pdb
