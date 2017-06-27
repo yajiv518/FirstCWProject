@@ -1,0 +1,6 @@
+C:\Users\snehal.dange\Documents\TeamGitProject\FirstCWProject\UsedCars\DAL\bin\DAL.dll.config
+C:\Users\snehal.dange\Documents\TeamGitProject\FirstCWProject\UsedCars\DAL\bin\DAL.dll
+C:\Users\snehal.dange\Documents\TeamGitProject\FirstCWProject\UsedCars\DAL\bin\DAL.pdb
+C:\Users\snehal.dange\Documents\TeamGitProject\FirstCWProject\UsedCars\DAL\obj\Debug\DAL.csprojResolveAssemblyReference.cache
+C:\Users\snehal.dange\Documents\TeamGitProject\FirstCWProject\UsedCars\DAL\obj\Debug\DAL.dll
+C:\Users\snehal.dange\Documents\TeamGitProject\FirstCWProject\UsedCars\DAL\obj\Debug\DAL.pdb
