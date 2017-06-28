@@ -14,7 +14,7 @@ namespace DAL
 {
     public class DataAccessLayer:IDataAccess<Stocks>
     {
-        private string connString = ConfigurationManager.ConnectionStrings["DatabaseConncet"].ConnectionString;
+        private string connString = "SERVER=172.16.0.26;PORT=3306;DATABASE=training;UID=training;PASSWORD=training;";//ConfigurationManager.ConnectionStrings["DatabaseConncet"].ConnectionString;
 
         private DynamicParameters FillParam(Stocks stock)
         {
@@ -28,8 +28,10 @@ namespace DAL
             param.Add("v_makeID", stock.MakeId, direction: ParameterDirection.Input);
             param.Add("v_modelID", stock.ModelId, direction: ParameterDirection.Input);
             param.Add("v_versionID", stock.VersionId, direction: ParameterDirection.Input);
-            if (stock.FuelEconomy != null)
+            if (stock.FuelEconomy != 0.0)
                 param.Add("v_fuelEco", stock.FuelEconomy, direction: ParameterDirection.Input);
+            else
+                param.Add("v_fuelEco", 0.0, direction: ParameterDirection.Input);
             return param;
         }
 
@@ -98,14 +100,14 @@ namespace DAL
         }
 
 
-        public Stocks Read(int id)
+        public ReadStock Read(int id)
         {
             var param = new DynamicParameters();
-            Stocks stockDetail;
-            param.Add("v_id", id, direction: ParameterDirection.Input);
+            ReadStock stockDetail=new ReadStock();
+            param.Add("carid", id, direction: ParameterDirection.Input);
             using (IDbConnection conn = new MySqlConnection(connString))
             {
-                stockDetail=conn.Query<Stocks>("sp_UsedCarsGetData", param, commandType: CommandType.StoredProcedure).AsList()[0];
+                stockDetail=conn.Query<ReadStock>("sp_UsedCarsGetData", param, commandType: CommandType.StoredProcedure).AsList()[0];
             }
 
             return stockDetail;
