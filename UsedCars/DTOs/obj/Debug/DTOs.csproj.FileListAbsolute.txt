@@ -13,3 +13,4 @@ C:\Users\palash.jain\Documents\Visual Studio 2013\Projects\Used_car\FirstCWProje
 C:\Users\palash.jain\Documents\Visual Studio 2013\Projects\Used_car\FirstCWProject\UsedCars\DTOs\bin\DTOs.pdb
 C:\Users\palash.jain\Documents\Visual Studio 2013\Projects\Used_car\FirstCWProject\UsedCars\DTOs\obj\Debug\DTOs.dll
 C:\Users\palash.jain\Documents\Visual Studio 2013\Projects\Used_car\FirstCWProject\UsedCars\DTOs\obj\Debug\DTOs.pdb
+S:\FirstCWProject\UsedCars\DTOs\obj\Debug\DTOs.csprojResolveAssemblyReference.cache

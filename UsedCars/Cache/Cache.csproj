@@ -40,7 +40,7 @@
   <ItemGroup>
     <Reference Include="Enyim.Caching, Version=2.12.0.0, Culture=neutral, PublicKeyToken=cec98615db04012e, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\..\Downloads\Enyim.Caching.dll</HintPath>
+      <HintPath>C:\Users\vijay.prajapati\Downloads\Enyim.Caching.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Web.DynamicData" />
@@ -72,7 +72,7 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="cacheLayer.cs" />
+    <Compile Include="CacheLayer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -95,14 +95,6 @@
     <ProjectReference Include="..\Interfaces\Interfaces.csproj">
       <Project>{21675778-5eae-4128-8518-fd916d3b8bac}</Project>
       <Name>Interfaces</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Services\Services.csproj">
-      <Project>{98b5ce6c-0b6d-4e88-b182-2d52570d87c1}</Project>
-      <Name>Services</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\UI\UI.csproj">
-      <Project>{4cb08070-f22e-4dec-b9c2-941e92ea9390}</Project>
-      <Name>UI</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

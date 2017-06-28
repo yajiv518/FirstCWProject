@@ -7,7 +7,6 @@ C:\Users\snehal.dange\Documents\TeamGitProject\FirstCWProject\UsedCars\BLL\obj\D
 S:\FirstCWProject\UsedCars\BLL\bin\BLL.dll.config
 S:\FirstCWProject\UsedCars\BLL\bin\BLL.dll
 S:\FirstCWProject\UsedCars\BLL\bin\BLL.pdb
-S:\FirstCWProject\UsedCars\BLL\obj\Debug\BLL.csprojResolveAssemblyReference.cache
 S:\FirstCWProject\UsedCars\BLL\obj\Debug\BLL.dll
 S:\FirstCWProject\UsedCars\BLL\obj\Debug\BLL.pdb
 C:\Users\palash.jain\Documents\Visual Studio 2013\Projects\Used_car\FirstCWProject\UsedCars\BLL\bin\BLL.dll.config
