@@ -16,3 +16,13 @@ S:\FirstCWProject\UsedCars\DAL\bin\Interfaces.dll
 S:\FirstCWProject\UsedCars\DAL\bin\MySql.Data.dll
 S:\FirstCWProject\UsedCars\DAL\bin\Entities.pdb
 S:\FirstCWProject\UsedCars\DAL\bin\Interfaces.pdb
+C:\Users\palash.jain\Documents\Visual Studio 2013\Projects\Used_car\FirstCWProject\UsedCars\DAL\bin\DAL.dll.config
+C:\Users\palash.jain\Documents\Visual Studio 2013\Projects\Used_car\FirstCWProject\UsedCars\DAL\bin\DAL.dll
+C:\Users\palash.jain\Documents\Visual Studio 2013\Projects\Used_car\FirstCWProject\UsedCars\DAL\bin\DAL.pdb
+C:\Users\palash.jain\Documents\Visual Studio 2013\Projects\Used_car\FirstCWProject\UsedCars\DAL\bin\Entities.dll
+C:\Users\palash.jain\Documents\Visual Studio 2013\Projects\Used_car\FirstCWProject\UsedCars\DAL\bin\Interfaces.dll
+C:\Users\palash.jain\Documents\Visual Studio 2013\Projects\Used_car\FirstCWProject\UsedCars\DAL\bin\Entities.pdb
+C:\Users\palash.jain\Documents\Visual Studio 2013\Projects\Used_car\FirstCWProject\UsedCars\DAL\bin\Interfaces.pdb
+C:\Users\palash.jain\Documents\Visual Studio 2013\Projects\Used_car\FirstCWProject\UsedCars\DAL\obj\Debug\DAL.csprojResolveAssemblyReference.cache
+C:\Users\palash.jain\Documents\Visual Studio 2013\Projects\Used_car\FirstCWProject\UsedCars\DAL\obj\Debug\DAL.dll
+C:\Users\palash.jain\Documents\Visual Studio 2013\Projects\Used_car\FirstCWProject\UsedCars\DAL\obj\Debug\DAL.pdb
