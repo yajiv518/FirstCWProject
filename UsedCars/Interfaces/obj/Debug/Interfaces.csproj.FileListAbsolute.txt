@@ -11,3 +11,11 @@ S:\FirstCWProject\UsedCars\Interfaces\bin\Entities.pdb
 S:\FirstCWProject\UsedCars\Interfaces\obj\Debug\Interfaces.csprojResolveAssemblyReference.cache
 S:\FirstCWProject\UsedCars\Interfaces\obj\Debug\Interfaces.dll
 S:\FirstCWProject\UsedCars\Interfaces\obj\Debug\Interfaces.pdb
+C:\Users\palash.jain\Documents\Visual Studio 2013\Projects\Used_car\FirstCWProject\UsedCars\Interfaces\bin\Interfaces.dll.config
+C:\Users\palash.jain\Documents\Visual Studio 2013\Projects\Used_car\FirstCWProject\UsedCars\Interfaces\bin\Interfaces.dll
+C:\Users\palash.jain\Documents\Visual Studio 2013\Projects\Used_car\FirstCWProject\UsedCars\Interfaces\bin\Interfaces.pdb
+C:\Users\palash.jain\Documents\Visual Studio 2013\Projects\Used_car\FirstCWProject\UsedCars\Interfaces\bin\Entities.dll
+C:\Users\palash.jain\Documents\Visual Studio 2013\Projects\Used_car\FirstCWProject\UsedCars\Interfaces\bin\Entities.pdb
+C:\Users\palash.jain\Documents\Visual Studio 2013\Projects\Used_car\FirstCWProject\UsedCars\Interfaces\obj\Debug\Interfaces.csprojResolveAssemblyReference.cache
+C:\Users\palash.jain\Documents\Visual Studio 2013\Projects\Used_car\FirstCWProject\UsedCars\Interfaces\obj\Debug\Interfaces.dll
+C:\Users\palash.jain\Documents\Visual Studio 2013\Projects\Used_car\FirstCWProject\UsedCars\Interfaces\obj\Debug\Interfaces.pdb

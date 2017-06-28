@@ -97,6 +97,7 @@ namespace DAL
             return tag;
         }
 
+
         public Stocks Read(int id)
         {
             var param = new DynamicParameters();
