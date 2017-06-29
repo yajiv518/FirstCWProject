@@ -25,7 +25,7 @@ namespace Entities
         [Required]
         public int ColorId { get; set; }
 
-        public int FuelEconomy { get; set; }
+        public double FuelEconomy { get; set; }
 
         [Required]
         public int MakeId { get; set; }
