@@ -1,0 +1,57 @@
+﻿@model IEnumerable<Entities.ReadStock>
+@using UsedCarUI.Models
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="~/frontpage.css">
+    <title>CarsForSale</title>
+</head>
+<body>
+    <h1>Used Car For Sale</h1>
+    <div id="filter">
+        <p id="filterByLocation">Filter By Location <span>@Html.DropDownList("cities",
+                                                                               new SelectList(Enum.GetValues(typeof(citylist))),
+                                                                               "Select City",
+                                                                               new {@class="cityFilter"})</span></p>
+        <p id="filterByBudget">Filter By Budget <span><input type="number" id="minPrice"></span>
+                                                <span><input type="number" id="maxPrice"></span>
+                                                 <button onclick="filterByPrice">GO</button></p>
+                
+    </div>
+    <div>
+    @foreach(var item in Model)
+        {
+
+        <div class="showCarsdetails">
+            <ul class="cars">
+                <li>
+                    <img class="CarsImage" src="~/used_car.jpg">
+                    <div>
+                        <p class=carDetail>@Html.Display(item.carcompany)</p>
+                        <p class=carDetail>@Html.Display(item.modelname)</p>
+                        <p class=carDetail>@Html.Display(item.carversionname)</p>
+                        <p class=carDetail>@Html.Display(string.Format("{0}",item.Price))</p>
+                        <p class=carDetail>@Html.Display(item.City)</p>
+                        <p class=carDetail>@Html.Display(string.Format("{0}",item.Kilometers))</p>
+                        <p class=carDetail>@Html.Display(item.FuelType)</p>
+                        <p class=carDetail>@Html.Display(string.Format("{0}",item.Year))</p>
+                    </div>
+                </li>
+           </ul>
+        </div>
+        }
+    </div>
+    
+    <div class="pageButton">
+        <button onclick="previousPage">Previous</button>
+        <button onclick="nextPage">Next</button>
+
+    </div>      
+</body>
+</html>

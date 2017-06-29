@@ -1,0 +1,43 @@
+﻿@model Entities.ReadStock
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>GET</title>
+</head>
+<body>
+    <div> 
+        <table>
+            <tr>
+                <td>
+                    @Html.Display("carcompany")
+                </td>
+                <td>
+                    @Html.Display("modelname")
+                </td>
+                <td>
+                    @Html.Display("carversionname")
+                </td>
+            </tr>
+        </table>
+    </div>
+    <img />
+    <div>
+        <ul>
+            <li>Price: @Html.Display("Price")</li>  
+            <li>Year: @Html.Display("Year")</li>  
+            <li>Kilometer: @Html.Display("Kilometers")</li>  
+            <li>Fueln Type: @Html.Display("FuelType")</li>  
+            <li>car Available At: @Html.Display("City")</li>  
+            <li>Color: @Html.Display("Color")</li>  
+            @Model.FuelEconomy?<li>Fuel Economy: @Html.Display("FuelEconomy")</li>:<li></li>
+        </ul>
+    </div>
+</body>
+</html>
