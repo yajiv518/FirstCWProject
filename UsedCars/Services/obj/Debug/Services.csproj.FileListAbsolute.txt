@@ -174,3 +174,14 @@ S:\FirstCWProject\UsedCars\Services\bin\Interfaces.pdb
 S:\FirstCWProject\UsedCars\Services\bin\Cache.dll
 S:\FirstCWProject\UsedCars\Services\bin\Enyim.Caching.dll
 S:\FirstCWProject\UsedCars\Services\bin\Cache.pdb
+C:\Users\palash.jain\Documents\Visual Studio 2013\Projects\Used_car\FirstCWProject\UsedCars\Services\bin\Cache.dll
+C:\Users\palash.jain\Documents\Visual Studio 2013\Projects\Used_car\FirstCWProject\UsedCars\Services\bin\Entities.dll
+C:\Users\palash.jain\Documents\Visual Studio 2013\Projects\Used_car\FirstCWProject\UsedCars\Services\bin\Interfaces.dll
+C:\Users\palash.jain\Documents\Visual Studio 2013\Projects\Used_car\FirstCWProject\UsedCars\Services\bin\DAL.dll
+C:\Users\palash.jain\Documents\Visual Studio 2013\Projects\Used_car\FirstCWProject\UsedCars\Services\bin\Enyim.Caching.dll
+C:\Users\palash.jain\Documents\Visual Studio 2013\Projects\Used_car\FirstCWProject\UsedCars\Services\bin\Dapper.dll
+C:\Users\palash.jain\Documents\Visual Studio 2013\Projects\Used_car\FirstCWProject\UsedCars\Services\bin\MySql.Data.dll
+C:\Users\palash.jain\Documents\Visual Studio 2013\Projects\Used_car\FirstCWProject\UsedCars\Services\bin\Cache.pdb
+C:\Users\palash.jain\Documents\Visual Studio 2013\Projects\Used_car\FirstCWProject\UsedCars\Services\bin\Entities.pdb
+C:\Users\palash.jain\Documents\Visual Studio 2013\Projects\Used_car\FirstCWProject\UsedCars\Services\bin\Interfaces.pdb
+C:\Users\palash.jain\Documents\Visual Studio 2013\Projects\Used_car\FirstCWProject\UsedCars\Services\bin\DAL.pdb
