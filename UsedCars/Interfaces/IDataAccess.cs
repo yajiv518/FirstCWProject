@@ -14,5 +14,6 @@ namespace Interfaces
         ReadStock Read(int id);
         int Delete(int id);
         int Edit(int id, T a);
+        //IEnumerable<T> GetAllStockDetail();
     }
 }

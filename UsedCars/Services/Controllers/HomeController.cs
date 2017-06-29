@@ -6,6 +6,8 @@ using System.Web.Mvc;
 using Entities;
 using Interfaces;
 using Cache;
+using DAL;
+using ElasticSearch;
 
 
 namespace Services.Controllers
@@ -15,7 +17,7 @@ namespace Services.Controllers
         public ActionResult Index()
         {
 
-            Stocks s = new Stocks();
+            /*Stocks s = new Stocks();
             s.Price = 100000;
             s.Year = 2013;
             s.Kilometers = 1000;
@@ -24,17 +26,20 @@ namespace Services.Controllers
             s.ColorId = 2;
             s.MakeId = 2;
             s.VersionId = 2;
-            //s.FuelEconomy = 12.5;
+            s.FuelEconomy = 12.5;
             s.ModelId = 2;
             ReadStock r = new ReadStock();
             CacheLayer c = new CacheLayer();
-            //IDataAccess<Stocks> d = new DataAccessLayer();
+            IDataAccess<Stocks> d = new DataAccessLayer();
             //int d12 = d.Create(s);
-            //d.Edit(1, s);
-            //d.Delete(1);
-            r=c.GetAll(2);
-            Console.Write(r);
-
+            d.Edit(1, s);
+            //d.Delete(5);
+            //r=c.GetAll(2);
+            Console.Write(r);*/
+            SyncESwithDatabase s = new SyncESwithDatabase();
+            s.SyncIndex();
+            //ElasticSearchClient s = new ElasticSearchClient();
+            //s.GetStockByBudget(5,50000000);
             return View();
         }
 

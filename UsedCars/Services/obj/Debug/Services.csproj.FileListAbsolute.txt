@@ -174,3 +174,7 @@ S:\FirstCWProject\UsedCars\Services\bin\Interfaces.pdb
 S:\FirstCWProject\UsedCars\Services\bin\Cache.dll
 S:\FirstCWProject\UsedCars\Services\bin\Enyim.Caching.dll
 S:\FirstCWProject\UsedCars\Services\bin\Cache.pdb
+S:\FirstCWProject\UsedCars\Services\bin\ElasticSearch.dll
+S:\FirstCWProject\UsedCars\Services\bin\Nest.dll
+S:\FirstCWProject\UsedCars\Services\bin\Elasticsearch.Net.dll
+S:\FirstCWProject\UsedCars\Services\bin\ElasticSearch.pdb
