@@ -7,6 +7,7 @@ using Enyim.Caching.Configuration;
 using Enyim.Caching.Memcached;
 using DAL;
 using Entities;
+using ElasticSearch;
 
 namespace Cache
 {
@@ -51,6 +52,8 @@ namespace Cache
                 string key = createkey(id); 
                
                 int tag = UpdateDetails.Edit(id, stock);
+                //ElasticSearchClient update = new ElasticSearchClient();
+                //update.UpdateStock(id, stock);
                 client.Store(StoreMode.Set, key, stock, DateTime.Now.AddMinutes(15));
                 return tag;
 
@@ -64,7 +67,7 @@ namespace Cache
                 using (MemcachedClient client = new MemcachedClient("memcached"))
                 {
 
-                  
+                    
                     _tag = UpdateDetails.Create(stock);
                     string key = createkey(_tag);
                     client.Store(StoreMode.Set, key, stock, DateTime.Now.AddMinutes(15));
@@ -87,7 +90,8 @@ namespace Cache
                     using (MemcachedClient client = new MemcachedClient("memcached"))
                     {
 
-                       
+                        ElasticSearchClient delete = new ElasticSearchClient();
+                        delete.DeleteStock(id);
                         _tag = UpdateDetails.Delete(id);
                         string key = createkey(id);
                         client.Remove(key);

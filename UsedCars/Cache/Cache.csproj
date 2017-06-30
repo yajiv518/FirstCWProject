@@ -88,6 +88,10 @@
       <Project>{8c3d3bae-6976-4220-b8e9-6cbeaebc11f2}</Project>
       <Name>DTOs</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ElasticSearch\ElasticSearch.csproj">
+      <Project>{368367d0-0f96-4809-bb28-62ac8c5691ed}</Project>
+      <Name>ElasticSearch</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Entities\Entities.csproj">
       <Project>{f6a7ee6c-e729-4537-a5a0-dcd0d98d4b41}</Project>
       <Name>Entities</Name>

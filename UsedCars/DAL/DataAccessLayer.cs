@@ -14,7 +14,7 @@ namespace DAL
 {
     public class DataAccessLayer:IDataAccess<Stocks>//,IDataAccess<ReadStock>
     {
-        private string connString = ConfigurationManager.ConnectionStrings["DatabaseConncet"].ConnectionString;
+        private string _connString = ConfigurationManager.ConnectionStrings["DatabaseConncet"].ConnectionString;
         private DynamicParameters FillParam(Stocks stock)
         {
             var param = new DynamicParameters();
@@ -60,6 +60,7 @@ namespace DAL
             int tag=0;
             try
             {
+
                 var param = FillParam(stock);
 
                 param.Add("v_id", id, direction: ParameterDirection.Input);
@@ -67,8 +68,9 @@ namespace DAL
                 param.Add("v_tag", dbType: DbType.Int32, direction: ParameterDirection.Output);
                 using (IDbConnection conn = new MySqlConnection(_connString))
                 {
-                    conn.Execute("sp_UsedCarsEdit", param, commandType: CommandType.StoredProcedure);
+                    conn.Execute("sp_UsedCarsEdit", stock, commandType: CommandType.StoredProcedure);
                 }
+
                 tag = param.Get<int>("v_tag");
             }
             catch (Exception)

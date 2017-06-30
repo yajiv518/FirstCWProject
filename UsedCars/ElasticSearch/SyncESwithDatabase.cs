@@ -32,7 +32,7 @@ namespace ElasticSearch
         public void CreateIndex()
         {
             ElasticClient client = ElasticClientInstance.GetInstance();
-            var temp = client.CreateIndex("stockdata_g3", c => c
+            var temp = client.CreateIndex("stockdata_g3_1", c => c
                          .NumberOfReplicas(0)
                          .NumberOfShards(1)
                          .AddMapping<ESGetDetail>(m => m.MapFromAttributes())
@@ -50,7 +50,7 @@ namespace ElasticSearch
             {
                 id = read.ID;
                 client.Index(read, i => i
-                    .Index("stockdata_g3")
+                    .Index("stockdata_g3_1")
                     .Type("esgetdetail")
                     .Id(id.ToString())
                          );

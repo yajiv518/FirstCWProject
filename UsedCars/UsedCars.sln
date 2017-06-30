@@ -18,6 +18,7 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interfaces", "Interfaces\Interfaces.csproj", "{21675778-5EAE-4128-8518-FD916D3B8BAC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElasticSearch", "ElasticSearch\ElasticSearch.csproj", "{368367D0-0F96-4809-BB28-62AC8C5691ED}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UsedCarUI", "UsedCarUI\UsedCarUI.csproj", "{243CF273-DD3C-4FA3-A7E0-A3E1DA5F37D9}"
 EndProject
 Global

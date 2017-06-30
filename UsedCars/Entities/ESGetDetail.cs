@@ -25,4 +25,10 @@ namespace Entities
 
         public string carversionname { get; set; }
     }
+    //public class ESGetDetailVM
+    //{
+    //    public IEnumerable<ESGetDetail> obj1 { get; set; }
+
+    //    public uint totalcount { get; set; }
+    //}
 }
