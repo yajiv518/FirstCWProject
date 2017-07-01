@@ -33,52 +33,52 @@ namespace DAL
             return param;
         }
 
-        public int Create(Stocks stock)
+        public ReadStock Create(Stocks stock)
         {
+            ReadStock stockDetail = new ReadStock();
             int newId;
             try
             {
                 var param = FillParam(stock);
-
+                
                 param.Add("v_id", dbType: DbType.Int32, direction: ParameterDirection.Output);
                 using (IDbConnection conn = new MySqlConnection(_connString))
                 {
-                    conn.Execute("sp_UsedCarsCreate", param, commandType: CommandType.StoredProcedure);
+                    stockDetail=conn.Query<ReadStock>("sp_UsedCarsCreate", stock, commandType: CommandType.StoredProcedure).FirstOrDefault();
                 }
-                newId = param.Get<int>("v_id");
+                //newId = param.Get<int>("v_id");
             }
             catch (Exception)
             {
                 
                 throw;
             }
-            return newId;
+            return stockDetail;
         }
 
-        public int Edit(int id,Stocks stock)
+        public ReadStock Edit(int id, Stocks stock)
         {
-            int tag=0;
+            ReadStock stockDetail = new ReadStock();
             try
             {
 
                 var param = FillParam(stock);
-
+                stock.StockId = id;
                 param.Add("v_id", id, direction: ParameterDirection.Input);
 
                 param.Add("v_tag", dbType: DbType.Int32, direction: ParameterDirection.Output);
                 using (IDbConnection conn = new MySqlConnection(_connString))
                 {
-                    conn.Execute("sp_UsedCarsEdit", stock, commandType: CommandType.StoredProcedure);
+                    stockDetail = conn.Query<ReadStock>("sp_UsedCarsEdit", stock, commandType: CommandType.StoredProcedure).FirstOrDefault();
                 }
 
-                tag = param.Get<int>("v_tag");
             }
             catch (Exception)
             {
                 
                 throw;
             }
-            return tag;
+            return stockDetail;
         }
 
         public int Delete(int id)
@@ -126,17 +126,17 @@ namespace DAL
             return stockDetail;
         }
 
-        //public IEnumerable<ReadStock> GetAllStockDetail()
-        //{
-        //    var param = new DynamicParameters();
-        //    IEnumerable<ReadStock> stockDetail;
-        //    using (IDbConnection conn = new MySqlConnection(connString))
-        //    {
-        //        stockDetail = conn.Query<ReadStock>("sp_AllUsedCarsGetData", param, commandType: CommandType.StoredProcedure);
-        //    }
+        public IEnumerable<ESGetDetail> GetAllStockDetail()
+        {
+            var param = new DynamicParameters();
+            IEnumerable<ESGetDetail> stockDetail;
+            using (IDbConnection conn = new MySqlConnection(_connString))
+            {
+                stockDetail = conn.Query<ESGetDetail>("sp_AllUsedCarsGetData", param, commandType: CommandType.StoredProcedure);
+            }
 
-        //    return stockDetail;
-        //}
+            return stockDetail;
+        }
 
     }
 }

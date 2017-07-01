@@ -9,11 +9,11 @@ namespace Interfaces
 {
     public interface IDataAccess<T>
     {
-        int Create(T a);
+        ReadStock Create(T a);
         //IEnumerable<T> GetAll(int limit, int offset, string order_by);
         ReadStock Read(int id);
         int Delete(int id);
-        int Edit(int id, T a);
-        //IEnumerable<T> GetAllStockDetail();
+        ReadStock Edit(int id, T a);
+        IEnumerable<ESGetDetail> GetAllStockDetail();
     }
 }

@@ -11,6 +11,7 @@ using ElasticSearch;
 using PagedList;
 using PagedList.Mvc;
 using DTOs;
+using System.IO;
 
 namespace Services.Controllers
 {
@@ -65,15 +66,11 @@ namespace Services.Controllers
                 {
                     if (min != null && min!="")
                     {
-                        int minVal = Convert.ToInt32(min);
-                        int maxVal = Convert.ToInt32(max);
-                        //results.totalStock = getAllCars.GetStockCountByCityAndPrice(city, minVal, maxVal);
-                        getAllStocks = getAllCars.GetStockByCityAndPrice(city, minVal, maxVal, pageNo * results.PageSize, results.PageSize+1);
+                        getAllStocks = getAllCars.GetStockByCityAndPrice(city, min, max, pageNo * results.PageSize, results.PageSize+1);
                         results.ResultList = getAllStocks;
                     }
                     else
                     {
-                        //results.totalStock = getAllCars.GetCityBasedStockCount(city);
                         getAllStocks = getAllCars.GetStockByCity(city, pageNo * results.PageSize, results.PageSize+1);
                         results.ResultList = getAllStocks;
                     }
@@ -81,22 +78,15 @@ namespace Services.Controllers
                 }
                 else if(min!=null && min!="")
                 {
-                    int minVal = Convert.ToInt32(min);
-                    int maxVal = Convert.ToInt32(max);
-                    //results.totalStock = getAllCars.GetBudgetBasedStockCount(minVal, maxVal);
-                    getAllStocks = getAllCars.GetStockByBudget(minVal, maxVal, pageNo * results.PageSize, results.PageSize+1);
+                    getAllStocks = getAllCars.GetStockByBudget(min, max, pageNo * results.PageSize, results.PageSize+1);
                     results.ResultList = getAllStocks;
                     return View("~/Views/Shared/UsedCar.cshtml", results);
                 }
                 else 
                 {
-                    
-                        //results.totalStock = getAllCars.GetAllStockCount();
-                    
                     getAllStocks = getAllCars.GetAllStock(pageNo * results.PageSize, results.PageSize+1);
                     results.ResultList = getAllStocks;
                     return View("~/Views/Shared/UsedCar.cshtml", results);
-                    
                 }
             }
             catch
@@ -112,9 +102,13 @@ namespace Services.Controllers
         {
             try
             {
+                ProfilePage detailCar = new ProfilePage();
                 CacheLayer carDetail = new CacheLayer();
                 ReadStock stockDetail = carDetail.GetAll(id);
-                return View("~/Views/Usedcar/GET.cshtml", stockDetail);
+                detailCar.CarProfile = stockDetail;
+                string dir_name = string.Format("S:/FirstCWProject/UsedCars/Services/CarImages/{0}/", id ) ;
+                detailCar.ImageCount = (Directory.GetFiles(dir_name).Length)/3;
+                return View("~/Views/Usedcar/GET.cshtml", detailCar);
             }
             catch
             {

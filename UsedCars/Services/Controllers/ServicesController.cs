@@ -2,10 +2,12 @@
 using Entities;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using WebApplication1.Models;
 
 namespace Services.Controllers
 {
@@ -24,6 +26,8 @@ namespace Services.Controllers
                     return BadRequest("Bad Input");
                 }
                 int stockId = usedCars.createStock(stocks);
+                string originalPath = string.Format("S:/FirstCWProject/UsedCars/Services/CarImages/{0}/", stockId);
+                Directory.CreateDirectory(Path.GetDirectoryName(originalPath));
                 return Ok(stockId);
             }
             catch
@@ -43,8 +47,8 @@ namespace Services.Controllers
                 {
                     return BadRequest("Bad Input");
                 }
-                int stockId = usedCars.updateStock(id, stocks);
-                return Ok(stockId);
+                usedCars.updateStock(id, stocks);
+                return Ok(id);
             }
             catch
             {
@@ -86,6 +90,27 @@ namespace Services.Controllers
                 return Ok(stockDetail);
             }
             catch
+            {
+                return InternalServerError();
+            }
+        }
+
+
+        [Route("api/{id}")]
+        [HttpPost]
+        public IHttpActionResult generateImage([FromUri]int id, [FromBody]Display dObj)
+        {
+            try
+            {
+                if (id != -1 && dObj.imgUrl != null)
+                {
+                    Produce sendobj = new Produce();
+                    sendobj.sender(id, dObj.imgUrl);
+                }
+                return Ok("Your image is uploaded successfully. :) ");
+
+            }
+            catch (Exception)
             {
                 return InternalServerError();
             }

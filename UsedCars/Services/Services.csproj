@@ -152,13 +152,24 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\CitiesList.cs" />
+    <Compile Include="Models\Display.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="CarImages\1\large_1.jpg" />
+    <Content Include="CarImages\1\large_2.jpg" />
+    <Content Include="CarImages\1\large_3.jpg" />
+    <Content Include="CarImages\1\original_1.jpg" />
+    <Content Include="CarImages\1\original_2.jpg" />
+    <Content Include="CarImages\1\original_3.jpg" />
+    <Content Include="CarImages\1\small_1.jpg" />
+    <Content Include="CarImages\1\small_2.jpg" />
+    <Content Include="CarImages\1\small_3.jpg" />
     <Content Include="CarImages\used_car.jpg" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\PagedList.css" />
+    <Content Include="CSS\carDetail.css" />
     <Content Include="CSS\frontpage.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -166,6 +177,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\CarDetailJS.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -228,6 +240,10 @@
     <ProjectReference Include="..\Interfaces\Interfaces.csproj">
       <Project>{21675778-5eae-4128-8518-fd916d3b8bac}</Project>
       <Name>Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\vijay.prajapati\Downloads\Producer\Producer\Producer.csproj">
+      <Project>{6ed28336-659a-42bf-a530-ca905e29048f}</Project>
+      <Name>Producer</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

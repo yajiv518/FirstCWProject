@@ -14,7 +14,7 @@
 @foreach (var item in Model.ResultList.Take(Model.PageSize))
 {
             <li>
-                <img class="CarsImage" src="~/CarImages/used_car.jpg">
+                <img class="CarsImage" src="~/CarImages/@item.ID/small_1.jpg">
                 <div>
                     <p class=carDetail><a href="./Home/@item.ID/CarDetail">@item.carcompany</a></p>
                     <p class=carDetail>@item.modelname</p>

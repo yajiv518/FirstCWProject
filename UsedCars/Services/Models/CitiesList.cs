@@ -15,6 +15,7 @@ namespace UsedCarUI.Models
         Delhi,
         Indore,
         Nagpur,
-        Bangalore
+        Bangalore,
+        Aurangabad
     }
 }

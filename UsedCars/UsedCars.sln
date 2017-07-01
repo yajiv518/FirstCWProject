@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElasticSearch", "ElasticSea
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UsedCarUI", "UsedCarUI\UsedCarUI.csproj", "{243CF273-DD3C-4FA3-A7E0-A3E1DA5F37D9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Producer", "C:\Users\vijay.prajapati\Downloads\Producer\Producer\Producer.csproj", "{6ED28336-659A-42BF-A530-CA905E29048F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +65,10 @@ Global
 		{243CF273-DD3C-4FA3-A7E0-A3E1DA5F37D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{243CF273-DD3C-4FA3-A7E0-A3E1DA5F37D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{243CF273-DD3C-4FA3-A7E0-A3E1DA5F37D9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6ED28336-659A-42BF-A530-CA905E29048F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6ED28336-659A-42BF-A530-CA905E29048F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6ED28336-659A-42BF-A530-CA905E29048F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6ED28336-659A-42BF-A530-CA905E29048F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
