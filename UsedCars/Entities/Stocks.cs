@@ -8,10 +8,7 @@ namespace Entities
 {
     public class Stocks
     {
-
-        
         public int StockId { get; set; }
-
         [Required]
         public int Price { get; set; }
         [Required]
@@ -24,9 +21,7 @@ namespace Entities
         public int CityId { get; set; }
         [Required]
         public int ColorId { get; set; }
-
         public double FuelEconomy { get; set; }
-
         [Required]
         public int MakeId { get; set; }
         [Required]

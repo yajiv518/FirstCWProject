@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Configuration;
 using Elasticsearch.Net.ConnectionPool;
-//using Carwale.Notifications; 
+
 
 namespace Carwale.DAL.CoreDAL
 {
@@ -16,36 +16,31 @@ namespace Carwale.DAL.CoreDAL
 
         private ElasticClient _client;
 
-        static ElasticClientInstance () {
-            
-        }
+        static ElasticClientInstance()
+        {
 
-        public static ElasticClient GetInstance() {
+        }
+        public static ElasticClient GetInstance()
+        {
             return _clientInstance._client;
         }
-
         private ElasticClientInstance()
         {
             try
             {
-                 Uri[] nodes = ConfigurationManager.AppSettings["ElasticHostUrl"].Split(';')
-                                .Select(s => new Uri("http://" + s)).ToArray();
+                Uri[] nodes = ConfigurationManager.AppSettings["ElasticHostUrl"].Split(';')
+                               .Select(s => new Uri("http://" + s)).ToArray();
                 var connectionPool = new SniffingConnectionPool(nodes);
                 var settings = new ConnectionSettings(
                     connectionPool,
                     defaultIndex: ConfigurationManager.AppSettings["ElasticIndexName"]
-                ).SetTimeout(1000 * 30) ;    // 30 seconds timeout
-                 //.MaximumRetries(3)         // 3 times retry
-                 //.SniffOnConnectionFault(true)
-                 //.SniffOnStartup(true)
-                 //.SniffLifeSpan(TimeSpan.FromMinutes(1));
+                ).SetTimeout(1000 * 30);
 
                 _client = new ElasticClient(settings);
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
-              //  var objErr = new ExceptionHandler(ex, "ElasticClientInstance.ElasticClientInstance()" + ex.InnerException);
-               // objErr.LogException();
+                throw;
             }
 
         }

@@ -7,9 +7,7 @@ namespace WebApplication1.Models
 {
     public class Display
     {
-        
         public string imgUrl { get; set; }
-
     }
 
 }

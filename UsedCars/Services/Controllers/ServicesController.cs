@@ -13,107 +13,109 @@ namespace Services.Controllers
 {
     public class ServicesController : ApiController
     {
-        CacheLayer usedCars = new CacheLayer();
-
-        
-        [HttpPost,Route("api/Usedcar")]
-        public IHttpActionResult POST([FromBody] Stocks stocks)
-        {
-            try
-            {
-                if (!ModelState.IsValid)
-                {
-                    return BadRequest("Bad Input");
-                }
-                int stockId = usedCars.createStock(stocks);
-                string originalPath = string.Format("S:/FirstCWProject/UsedCars/Services/CarImages/{0}/", stockId);
-                Directory.CreateDirectory(Path.GetDirectoryName(originalPath));
-                return Ok(stockId);
-            }
-            catch
-            {
-                return InternalServerError();
-            }
-
-        }
-
-        [Route("api/Usedcar/{id}")]
-        [HttpPut]
-        public IHttpActionResult PUT(int id, [FromBody] Stocks stocks)
-        {
-            try
-            {
-                if (!ModelState.IsValid && id < 0)
-                {
-                    return BadRequest("Bad Input");
-                }
-                usedCars.updateStock(id, stocks);
-                return Ok(id);
-            }
-            catch
-            {
-                return InternalServerError();
-            }
-        }
-
-        [Route("api/Usedcar/{id}")]
-        [HttpDelete]
-        public IHttpActionResult Delete(int id)
-        {
-            try
-            {
-                if (!ModelState.IsValid)
-                {
-                    return BadRequest("Bad Input");
-                }
-                int stockId = usedCars.deleteStock(id);
-                return Ok(stockId);
-            }
-            catch
-            {
-                return InternalServerError();
-            }
-        }
-
-        [Route("api/Usedcar/{id}/CarDetail")]
-        [HttpGet]
-        public IHttpActionResult GET(int id)
-        {
-            try
-            {
-                if (!ModelState.IsValid)
-                {
-                    return BadRequest("Bad Input");
-                }
-                CacheLayer carDetail = new CacheLayer();
-                ReadStock stockDetail = carDetail.GetAll(id);
-                return Ok(stockDetail);
-            }
-            catch
-            {
-                return InternalServerError();
-            }
-        }
-
-
-        [Route("api/{id}")]
+        private CacheLayer _stockDetails = new CacheLayer();
+        [Route("api/Stock/")]
         [HttpPost]
-        public IHttpActionResult generateImage([FromUri]int id, [FromBody]Display dObj)
+        public IHttpActionResult CreateStock([FromBody] Stocks stock)
         {
             try
             {
-                if (id != -1 && dObj.imgUrl != null)
+                if (!Validate(stock))
+                {
+                    return BadRequest("Enter correct values for stock");
+                }
+                int stockId = _stockDetails.CreateStock(stock);
+                string imageDirectoryPath = string.Format("S:/FirstCWProject/UsedCars/Services/CarImages/{0}/", stockId);
+                Directory.CreateDirectory(Path.GetDirectoryName(imageDirectoryPath));
+                return Ok(stockId);
+            }
+            catch
+            {
+                return InternalServerError();
+            }
+
+        }
+
+        [Route("api/Stock/{stockId}")]
+        [HttpPut]
+        public IHttpActionResult UpdateStock(int stockId, [FromBody] Stocks stock)
+        {
+            try
+            {
+                if (stockId < 0 && (!Validate(stock)))
+                {
+                    return BadRequest("Bad Input");
+                }
+                _stockDetails.UpdateStock(stockId, stock);
+                return Ok(stockId);
+            }
+            catch
+            {
+                return InternalServerError();
+            }
+        }
+
+        [Route("api/Stock/{id}")]
+        [HttpDelete]
+        public IHttpActionResult DeleteStock(int id)
+        {
+            try
+            {
+                if (id <= 0)
+                {
+                    return BadRequest("Bad Input");
+                }
+                int stockId = _stockDetails.DeleteStock(id);
+                return Ok(stockId);
+            }
+            catch
+            {
+                return InternalServerError();
+            }
+        }
+
+        [Route("api/Stock/{id}/Image/")]
+        [HttpPost]
+        public IHttpActionResult GenerateImage(int id, [FromBody]Display stockImage)
+        {
+            try
+            {
+                if (id > 0 && stockImage.imgUrl != null)
                 {
                     Produce sendobj = new Produce();
-                    sendobj.sender(id, dObj.imgUrl);
+                    sendobj.sender(id, stockImage.imgUrl);
                 }
-                return Ok("Your image is uploaded successfully. :) ");
-
+                return Ok("Your image is uploaded successfully :) ");
             }
             catch (Exception)
             {
                 return InternalServerError();
             }
+        }
+
+        private bool Validate(Stocks stock)
+        {
+            if (!ModelState.IsValid)
+            {
+                return false;
+            }
+            if (stock.Price < 10000 && stock.Price > 50000000)
+            {
+                return false;
+            }
+            if (stock.Year < 2010 && stock.Year > DateTime.Now.Year)
+            {
+                return false;
+            }
+            if (stock.Kilometers <= 100 && stock.Kilometers >= 300000)
+            {
+                return false;
+            }
+            if (stock.FuelEconomy != 0 && stock.FuelEconomy < 1 && stock.FuelEconomy > 50)
+            {
+                return false;
+            }
+            return true;
         }
     }
 }

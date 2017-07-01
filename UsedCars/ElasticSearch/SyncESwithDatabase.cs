@@ -17,18 +17,6 @@ namespace ElasticSearch
 {
     public class SyncESwithDatabase
     {
-        //public IEnumerable<ESGetDetail> GetAllStockDetail()
-        //{
-        //    string connString = ConfigurationManager.ConnectionStrings["DatabaseConncet"].ConnectionString;
-        //    IEnumerable<ESGetDetail> stockDetail;
-        //    using (IDbConnection conn = new MySqlConnection(connString))
-        //    {
-        //        stockDetail = conn.Query<ESGetDetail>("sp_AllUsedCarsGetData", commandType: CommandType.StoredProcedure);
-        //    }
-
-        //    return stockDetail;
-        //}
-
         public void CreateIndex()
         {
             ElasticClient client = ElasticClientInstance.GetInstance();
@@ -40,20 +28,17 @@ namespace ElasticSearch
         }
         public void SyncIndex()
         {
-             IDataAccess<Stocks> data = new DataAccessLayer();
-            //IDataAccess<ReadStock> d = new DataAccessLayer();
+            IDataAccess<Stocks> data = new DataAccessLayer();
 
-             IEnumerable<ESGetDetail> allStockData = data.GetAllStockDetail();
+            IEnumerable<ESGetDetail> allStockData = data.GetAllStockDetail();
             ElasticClient client = ElasticClientInstance.GetInstance();
             //CreateIndex();
-            int id = 1;
             foreach (ESGetDetail read in allStockData)
             {
-                id = read.ID;
                 client.Index(read, i => i
                     .Index("stockdata_g3_1")
                     .Type("esgetdetail")
-                    .Id(id.ToString())
+                    .Id(read.ID.ToString())
                          );
             }
         }

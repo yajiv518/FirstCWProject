@@ -11,19 +11,20 @@ namespace ElasticSearch
 {
     public class ElasticSearchClient
     {
-        ElasticClient client = ElasticClientInstance.GetInstance();
-        QueryContainer _query;
-        MatchAllQuery _allStockQuery = new MatchAllQuery();
-        TermQuery _stockByCityQuery = new TermQuery()
+        private ElasticClient _client = ElasticClientInstance.GetInstance();
+        private QueryContainer _queryStore;
+        private MatchAllQuery _allStocks = new MatchAllQuery();
+        private IEnumerable<ESGetDetail> _getAllStocks;
+        private TermQuery _stocksByCity = new TermQuery()
         {
             Field = "city"
         };
-        RangeQuery _stockByBudgetQuery = new RangeQuery() 
+        private RangeQuery _stocksByBudget = new RangeQuery()
         {
-            Field="price"
+            Field = "price"
         };
 
-        private SearchRequest MakeSearchRequest(int page,int pageSize,QueryContainer query)
+        private SearchRequest MakeSearchRequest(int page, int pageSize, QueryContainer query)
         {
             var searchRequest = new SearchRequest
             {
@@ -34,190 +35,88 @@ namespace ElasticSearch
             return searchRequest;
         }
 
-        //public int GetAllStockCount()
-        //{
-        //    var searchResult = client.Count<ESGetDetail>(s => s
-        //                                                .Index("stockdata_g3_1")
-        //                                                .Type("esgetdetail")
-        //                                                .Query(p=>p.MatchAll()));
-        //    int count = Convert.ToInt32(searchResult.Count);
-        //    return count;
-        //}
-        public IEnumerable<ESGetDetail> GetAllStock(int page,int pageSize)
+        public IEnumerable<ESGetDetail> GetAllStocks(int page, int pageSize)
         {
-            _query = _allStockQuery;
-            var searchRequest = MakeSearchRequest(page,pageSize,_query);
-            //{
-            //    From = page,
-            //    Size = pageSize,
-            //    Query = _query
-            //};
-            var searchResult = client.Search<ESGetDetail>(searchRequest);
-            //var searchResult = client.Search<ESGetDetail>(s => s
-            //                                            .Index("stockdata_g3_1")
-            //                                            .Type("esgetdetail")
-            //                                            .From(page)
-            //                                            .Size(pageSize)
-            //                                            .MatchAll());
-            IEnumerable<ESGetDetail> getAllStock = searchResult.Documents.ToArray<ESGetDetail>();
-            return getAllStock;
+            _queryStore = _allStocks;
+            var searchRequest = MakeSearchRequest(page, pageSize, _queryStore);
+            var searchResults = _client.Search<ESGetDetail>(searchRequest);
+            _getAllStocks = searchResults.Documents.ToArray<ESGetDetail>();
+            return _getAllStocks;
         }
 
-
-        //public int GetCityBasedStockCount(string cityName)
-        //{
-        //    var searchResult = client.Count<ESGetDetail>(s => s
-        //                                                .Index("stockdata_g3_1")
-        //                                                .Type("esgetdetail")
-        //                                                .Query(q => q
-        //                                                    .Term(p => p.City, cityName)
-        //                                                    ));
-        //    int count = Convert.ToInt32(searchResult.Count);
-        //    return count;
-        //}
-        public IEnumerable<ESGetDetail> GetStockByCity(string cityName,int page,int pageSize)
+        public IEnumerable<ESGetDetail> GetStocksByCity(string cityName, int page, int pageSize)
         {
-            _stockByCityQuery.Value = cityName;
-            QueryContainer _query = _stockByCityQuery;
-            var searchRequest = MakeSearchRequest(page,pageSize,_query);
-            //{
-            //    From = page,
-            //    Size = pageSize,
-            //    Query = _query
-            //};
-            var searchResult = client.Search<ESGetDetail>(searchRequest);
-            //var searchResult = client.Search<ESGetDetail>(s => s
-            //                                            .Index("stockdata_g3_1")
-            //                                            .Type("esgetdetail")
-            //                                            .From(page)
-            //                                            .Size(pageSize)
-            //                                            .Query(q=>q
-            //                                                .Term(p=>p.City,cityName)
-            //                                                )
-            //                                            );
-            IEnumerable<ESGetDetail> getAllStock = searchResult.Documents.ToArray<ESGetDetail>();
-            return getAllStock;
+            _stocksByCity.Value = cityName;
+            _queryStore = _stocksByCity;
+            var searchRequest = MakeSearchRequest(page, pageSize, _queryStore);
+            var searchResults = _client.Search<ESGetDetail>(searchRequest);
+            _getAllStocks = searchResults.Documents.ToArray<ESGetDetail>();
+            return _getAllStocks;
         }
 
-
-        //public int GetBudgetBasedStockCount(int minValue, int maxValue)
-        //{
-            
-        //    var searchResult = client.Count<ESGetDetail>(s => s
-        //                                                .Index("stockdata_g3_1")
-        //                                                .Type("esgetdetail")
-        //                                                .Query(q => q
-        //                                                    .Range(p => p
-        //                                                        .OnField("price")
-        //                                                        .LowerOrEquals(maxValue)
-        //                                                        .GreaterOrEquals(minValue)
-        //                                                        )
-        //                                                    ));
-        //    int count = Convert.ToInt32(searchResult.Count);
-        //    return count;
-        //}
-        public IEnumerable<ESGetDetail> GetStockByBudget(string minValue, string maxValue, int page, int pageSize)
+        public IEnumerable<ESGetDetail> GetStocksByBudget(string minValue, string maxValue, int page, int pageSize)
         {
-            _stockByBudgetQuery.GreaterThanOrEqualTo = (minValue);
-            _stockByBudgetQuery.LowerThanOrEqualTo = (maxValue);
-            QueryContainer _query = _stockByBudgetQuery;
-            var searchRequest = MakeSearchRequest(page, pageSize, _query);
-            var searchResult = client.Search<ESGetDetail>(searchRequest);
-            //var searchResult = client.Search<ESGetDetail>(s => s
-            //                                            .Index("stockdata_g3_1")
-            //                                            .Type("esgetdetail")
-            //                                            .From(page)
-            //                                            .Size(pageSize)
-            //                                            .Query(q => q
-            //                                                .Range(p=>p
-            //                                                    .OnField("price")
-            //                                                    .LowerOrEquals(maxValue)
-            //                                                    .GreaterOrEquals(minValue)
-            //                                                    )
-            //                                                ));
-            IEnumerable<ESGetDetail> getAllStock = searchResult.Documents.ToArray<ESGetDetail>();
-            return getAllStock;
+            _stocksByBudget.GreaterThanOrEqualTo = (minValue);
+            _stocksByBudget.LowerThanOrEqualTo = (maxValue);
+            _queryStore = _stocksByBudget;
+            var searchRequest = MakeSearchRequest(page, pageSize, _queryStore);
+            var searchResults = _client.Search<ESGetDetail>(searchRequest);
+            _getAllStocks = searchResults.Documents.ToArray<ESGetDetail>();
+            return _getAllStocks;
         }
 
-        //public int GetStockCountByCityAndPrice(string cityName, int minValue, int maxValue)
-        //{
-        //    var searchResult = client.Count<ESGetDetail>(s => s
-        //                                                .Index("stockdata_g3_1")
-        //                                                .Type("esgetdetail")
-        //                                                .Query(q => q
-        //                                                    .Range(p => p
-        //                                                        .OnField("price")
-        //                                                        .LowerOrEquals(maxValue)
-        //                                                        .GreaterOrEquals(minValue)
-        //                                                        )
-        //                                                        && q.Term(p => p.City, cityName)
-        //                                                    ));
-        //    int count = Convert.ToInt32(searchResult.Count);
-        //    return count;
-        //}
-        public IEnumerable<ESGetDetail> GetStockByCityAndPrice(string cityName, string minValue, string maxValue, int page, int pageSize)
+        public IEnumerable<ESGetDetail> GetStocksByCityAndPrice(string cityName, string minValue, string maxValue, int page, int pageSize)
         {
-            _stockByCityQuery.Value = cityName;
-            _stockByBudgetQuery.GreaterThanOrEqualTo = (minValue);
-            _stockByBudgetQuery.LowerThanOrEqualTo = (maxValue);
-            QueryContainer _query = _stockByCityQuery && _stockByBudgetQuery;
-            var searchRequest = MakeSearchRequest(page, pageSize, _query);
-            var searchResult = client.Search<ESGetDetail>(searchRequest);
-            //var searchResult = client.Search<ESGetDetail>(s => s
-            //                                            .Index("stockdata_g3_1")
-            //                                            .Type("esgetdetail")
-            //                                            .From(page)
-            //                                            .Size(pageSize)
-            //                                            .Query(q => q
-            //                                                .Range(p=>p
-            //                                                    .OnField("price")
-            //                                                    .LowerOrEquals(maxValue)
-            //                                                    .GreaterOrEquals(minValue)
-            //                                                    )
-            //                                                    && q.Term(p => p.City, cityName)
-            //                                                ));
-            IEnumerable<ESGetDetail> getAllStock = searchResult.Documents.ToArray<ESGetDetail>();
-            return getAllStock;
+            _stocksByCity.Value = cityName;
+            _stocksByBudget.GreaterThanOrEqualTo = minValue;
+            _stocksByBudget.LowerThanOrEqualTo = maxValue;
+            _queryStore = _stocksByCity && _stocksByBudget;
+            var searchRequest = MakeSearchRequest(page, pageSize, _queryStore);
+            var searchResults = _client.Search<ESGetDetail>(searchRequest);
+            _getAllStocks = searchResults.Documents.ToArray<ESGetDetail>();
+            return _getAllStocks;
         }
 
 
         public void CreateESStock(ESGetDetail createdStock)
         {
             int id = createdStock.ID;
-            client.Index(createdStock, i => i
+            _client.Index(createdStock, i => i
                 .Index("stockdata_g3_1")
                 .Type("esgetdetail")
                 .Id(id.ToString())
                      );
         }
-        
-        public void UpdateStock(int id, ESGetDetail updatedStock)
+
+        public void UpdateESStock(int stockId, ESGetDetail updatedStock)
         {
-            client.Update<ESGetDetail, object>(u => u
-                .Id(id)
+            _client.Update<ESGetDetail, object>(u => u
+                .Id(stockId)
                 .Index("stockdata_g3_1")
                 .Type("esgetdetail")
-                .Doc(new { Price = updatedStock.Price,
-                           Year = updatedStock.Year,
-                           Kilometers = updatedStock.Kilometers,
-                           FuelType = updatedStock.FuelType,
-                           City = updatedStock.City,
-                           carcompany = updatedStock.carcompany,
-                           modelname = updatedStock.modelname,
-                           carversionname = updatedStock.carversionname
+                .Doc(new
+                {
+                    Price = updatedStock.Price,
+                    Year = updatedStock.Year,
+                    Kilometers = updatedStock.Kilometers,
+                    FuelType = updatedStock.FuelType,
+                    City = updatedStock.City,
+                    carcompany = updatedStock.carcompany,
+                    modelname = updatedStock.modelname,
+                    carversionname = updatedStock.carversionname
                 })
                 .RetryOnConflict(3)
                 .Refresh()
             );
         }
-        public void DeleteStock(int id)
+        public void DeleteESStock(int stockId)
         {
-            client.DeleteByQuery<ESGetDetail>(q => q
-             .AllIndices()
-             .Query(rq => rq
-                 .Term(f => f.ID, id)
-                )
-            );
-        }	
+            _client.DeleteByQuery<ESGetDetail>(q => q
+            .AllIndices()
+            .Query(rq => rq
+                .Term(f => f.ID, stockId)
+               )
+           );
+        }
     }
 }

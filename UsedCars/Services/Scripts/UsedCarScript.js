@@ -15,7 +15,7 @@ $(document).ready(function () {
 
     $('.cityFilter').change(function () {
             city = $("#cities option:selected").text().toLowerCase();       
-            var path = "/Home/FilterByCity?city=" + city + "&min=" + minPrice + "&max=" + maxPrice + "";
+            var path = "/Home/Filter?city=" + city + "&minPrice=" + minPrice + "&maxPrice=" + maxPrice + "";
             $.ajax(path).done(function (response) {
                 console.log(response);
                 $("#showCars").html(response);
@@ -28,7 +28,7 @@ $(document).ready(function () {
         if ($("#minPrice").val() == "") {
             minPrice = "";
             maxPrice = "";
-            var path = "/Home/FilterByCity?city=" + city + "";
+            var path = "/Home/Filter?city=" + city + "";
             $("#showCars").load(path);
         }
         else {
@@ -38,7 +38,7 @@ $(document).ready(function () {
             
             if ((minPrice > 0 && maxPrice > 0 && minPrice <= maxPrice)) {
 
-                var path = "/Home/FilterByCity?city=" + city + "&min=" + minPrice + "&max=" + maxPrice + "";
+                var path = "/Home/Filter?city=" + city + "&minPrice=" + minPrice + "&maxPrice=" + maxPrice + "";
                 $("#showCars").load(path);
             }
             else if (minPrice == NaN) {
@@ -55,7 +55,7 @@ $(document).ready(function () {
 function previousPage() {
     $(document).ready(function () {
         var page = $("#previousButton1").attr("value");
-        var path = "/Home/FilterByCity?city=" + city + "&min=" + minPrice + "&max=" + maxPrice + "&page=" + page + "";
+        var path = "/Home/Filter?city=" + city + "&minPrice=" + minPrice + "&maxPrice=" + maxPrice + "&page=" + page + "";
         $("#showCars").load(path);
     });
 }
@@ -64,7 +64,7 @@ function nextPage() {
    
     $(document).ready(function () {
         var page = $("#nextButton1").attr('value');
-        var path = "/Home/FilterByCity?city=" + city + "&min=" + minPrice + "&max=" + maxPrice + "&page=" + page + "";
+        var path = "/Home/Filter?city=" + city + "&minPrice=" + minPrice + "&maxPrice=" + maxPrice + "&page=" + page + "";
         $("#showCars").load(path);
     });
 }

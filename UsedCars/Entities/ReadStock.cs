@@ -18,10 +18,10 @@ namespace Entities
         [JsonProperty("price")]
         public int Price { get; set; }
         [DataMember]
-       [JsonProperty("year")]
+        [JsonProperty("year")]
         public int Year { get; set; }
         [DataMember]
-       [JsonProperty("kilometers")]
+        [JsonProperty("kilometers")]
         public int Kilometers { get; set; }
         [DataMember]
         [JsonProperty("fueltype")]
@@ -36,13 +36,13 @@ namespace Entities
         [JsonProperty("fueleconomy")]
         public float FuelEconomy { get; set; }
         [DataMember]
-         [JsonProperty("carcompany")]
+        [JsonProperty("carcompany")]
         public string carcompany { get; set; }
         [DataMember]
-         [JsonProperty("modelname")]
+        [JsonProperty("modelname")]
         public string modelname { get; set; }
         [DataMember]
-         [JsonProperty("carversionname")]
+        [JsonProperty("carversionname")]
         public string carversionname { get; set; }
     }
 }

@@ -13,54 +13,97 @@ namespace Cache
 {
     public class CacheLayer
     {
-        DataAccessLayer UpdateDetails = new DataAccessLayer();
-        public string createkey(int carId)
-        {
-            return string.Format("UsedCar_{0}", carId);
-        }
-
-       
-        public ReadStock GetAll(int carId)
+        private DataAccessLayer _dataAccessLayer = new DataAccessLayer();
+        public ReadStock GetStock(int stockId)
         {
             ReadStock carDetails = null;
             try
             {
-                using (MemcachedClient client = new MemcachedClient("memcached"))
+                string cacheKey = CreateKey(stockId);
+                using (MemcachedClient _client = new MemcachedClient("memcached"))
                 {
-                    string key = createkey(carId);
-                    carDetails = (ReadStock)client.Get(key);
+                    carDetails = (ReadStock)_client.Get(cacheKey);
                     if (carDetails == null)
                     {
-
-                        carDetails = UpdateDetails.Read(carId);
-                        client.Store(StoreMode.Add, key, carDetails, DateTime.Now.AddMinutes(15));
+                        carDetails = _dataAccessLayer.ReadDbStock(stockId);
+                        _client.Store(StoreMode.Add, cacheKey, carDetails, DateTime.Now.AddMinutes(60));
                     }
-
                 }
             }
             catch (Exception)
             {
-                
                 throw;
             }
             return carDetails;
         }
-        public void updateStock(int id, Stocks stock)
+        public void UpdateStock(int stockId, Stocks stock)
         {
-            using (MemcachedClient client = new MemcachedClient("memcached"))
+            string cacheKey = CreateKey(stockId);
+            ReadStock getUpdatedData = new ReadStock();
+            ElasticSearchClient updateES = new ElasticSearchClient();
+            ESGetDetail getUpdatedESData = new ESGetDetail();
+            try
             {
-                string key = createkey(id);
-                ReadStock getUpdatedData = new ReadStock();
-                getUpdatedData = UpdateDetails.Edit(id, stock);
-                ElasticSearchClient update = new ElasticSearchClient();
-                client.Store(StoreMode.Set, key, getUpdatedData, DateTime.Now.AddMinutes(15));
-                ESGetDetail getUpdatedESData = new ESGetDetail();
-                getUpdatedESData = convertCachetoESData(getUpdatedData);
-                update.UpdateStock(id, getUpdatedESData);
+
+                getUpdatedData = _dataAccessLayer.EditDbStock(stockId, stock);
+                using (MemcachedClient client = new MemcachedClient("memcached"))
+                {
+                    client.Store(StoreMode.Set, cacheKey, getUpdatedData, DateTime.Now.AddMinutes(60));
+                }
+                getUpdatedESData = ConvertCachetoESData(getUpdatedData);
+                updateES.UpdateESStock(stockId, getUpdatedESData);
+            }
+            catch (Exception)
+            {
+                throw;
             }
         }
 
-        private ESGetDetail convertCachetoESData(ReadStock getUpdatedData)
+        public int CreateStock(Stocks stock)
+        {
+            int _newStockid = 0;
+            try
+            {
+                ReadStock getCreatedData = new ReadStock();
+                ESGetDetail getCreatedESData = new ESGetDetail();
+                ElasticSearchClient createES = new ElasticSearchClient();
+                getCreatedData = _dataAccessLayer.CreateDbStock(stock);
+                string cacheKey = CreateKey(getCreatedData.ID);
+                using (MemcachedClient client = new MemcachedClient("memcached"))
+                {
+                    client.Store(StoreMode.Add, cacheKey, getCreatedData, DateTime.Now.AddMinutes(15));
+                }
+                getCreatedESData = ConvertCachetoESData(getCreatedData);
+                createES.CreateESStock(getCreatedESData);
+                _newStockid = getCreatedESData.ID;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return _newStockid;
+        }
+        public int DeleteStock(int stockId)
+        {
+            try
+            {
+                ElasticSearchClient deleteES = new ElasticSearchClient();
+                deleteES.DeleteESStock(stockId);
+                _dataAccessLayer.DeleteDbStock(stockId);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return stockId;
+        }
+
+        public string CreateKey(int carId)
+        {
+            return string.Format("UsedCar_{0}", carId);
+        }
+
+        private ESGetDetail ConvertCachetoESData(ReadStock getUpdatedData)
         {
             ESGetDetail convertedData = new ESGetDetail();
             convertedData.carcompany = getUpdatedData.carcompany;
@@ -74,57 +117,5 @@ namespace Cache
             convertedData.carversionname = getUpdatedData.carversionname;
             return convertedData;
         }
-        public int createStock(Stocks stock)
-        {
-            int _newStockid = 0;
-            try
-            {
-                using (MemcachedClient client = new MemcachedClient("memcached"))
-                {
-
-
-                    ReadStock getCreatedData = new ReadStock();
-                    getCreatedData = UpdateDetails.Create(stock);
-                    string key = createkey(getCreatedData.ID);
-                    client.Store(StoreMode.Set, key, getCreatedData, DateTime.Now.AddMinutes(15));
-                    ESGetDetail getCreatedESData = new ESGetDetail();
-                    getCreatedESData = convertCachetoESData(getCreatedData);
-                    ElasticSearchClient create = new ElasticSearchClient();
-                    create.CreateESStock(getCreatedESData);
-                    _newStockid = getCreatedESData.ID;
-                }
-            }
-            catch (Exception)
-            {
-                
-                throw;
-            }
-            return _newStockid;
-        }
-            public int deleteStock(int id)
-            {
-                int _tag=0;
-                try
-                {
-                    using (MemcachedClient client = new MemcachedClient("memcached"))
-                    {
-
-                        ElasticSearchClient delete = new ElasticSearchClient();
-                        delete.DeleteStock(id);
-                        _tag = UpdateDetails.Delete(id);
-                        string key = createkey(id);
-                        client.Remove(key);
-                      
-
-                    }
-
-                }
-                catch (Exception)
-                {
-                    
-                    throw;
-                }
-                return _tag;
-            }
     }
 }
