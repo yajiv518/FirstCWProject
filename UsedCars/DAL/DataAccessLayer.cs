@@ -17,37 +17,37 @@ namespace DAL
         private string _connString = ConfigurationManager.ConnectionStrings["DatabaseConncet"].ConnectionString;
         public ReadStock CreateDbStock(Stocks stock)
         {
-            ReadStock stockDetail = new ReadStock();
+            //ReadStock stockDetail = new ReadStock();
             try
             {
-                using (IDbConnection conn = new MySqlConnection(_connString))
+                using (IDbConnection _conn = new MySqlConnection(_connString))
                 {
-                    stockDetail = conn.Query<ReadStock>("sp_UsedCarsCreate", stock, commandType: CommandType.StoredProcedure).FirstOrDefault();
+                    return _conn.Query<ReadStock>("sp_UsedCarsCreate", stock, commandType: CommandType.StoredProcedure).FirstOrDefault();
                 }
             }
             catch (Exception)
             {
                 throw;
             }
-            return stockDetail;
+            //return stockDetail;
         }
 
-        public ReadStock EditDbStock(int stockId, Stocks stock)
+        public ReadStock UpdateDbStock(int stockId, Stocks stock)
         {
-            ReadStock stockDetail = new ReadStock();
+            //ReadStock stockDetail = new ReadStock();
             try
             {
                 stock.StockId = stockId;
-                using (IDbConnection conn = new MySqlConnection(_connString))
+                using (IDbConnection _conn = new MySqlConnection(_connString))
                 {
-                    stockDetail = conn.Query<ReadStock>("sp_UsedCarsEdit", stock, commandType: CommandType.StoredProcedure).FirstOrDefault();
+                    return _conn.Query<ReadStock>("sp_UsedCarsEdit", stock, commandType: CommandType.StoredProcedure).FirstOrDefault();
                 }
             }
             catch (Exception)
             {
                 throw;
             }
-            return stockDetail;
+            //return stockDetail;
         }
 
         public void DeleteDbStock(int stockId)
@@ -56,9 +56,9 @@ namespace DAL
             {
                 var param = new DynamicParameters();
                 param.Add("stockId", stockId, direction: ParameterDirection.Input);
-                using (IDbConnection conn = new MySqlConnection(_connString))
+                using (IDbConnection _conn = new MySqlConnection(_connString))
                 {
-                    conn.Execute("sp_UsedCarsDelete", param, commandType: CommandType.StoredProcedure);
+                    _conn.Execute("sp_UsedCarsDelete", param, commandType: CommandType.StoredProcedure);
                 }
             }
             catch (Exception)
@@ -71,14 +71,14 @@ namespace DAL
         public ReadStock ReadDbStock(int stockId)
         {
 
-            ReadStock stockDetail = new ReadStock();
+            //ReadStock stockDetail = new ReadStock();
             try
             {
                 var param = new DynamicParameters();
                 param.Add("stockId", stockId, direction: ParameterDirection.Input);
-                using (IDbConnection conn = new MySqlConnection(_connString))
+                using (IDbConnection _conn = new MySqlConnection(_connString))
                 {
-                    stockDetail = conn.Query<ReadStock>("sp_UsedCarsGetData", param, commandType: CommandType.StoredProcedure).AsList()[0];
+                    return _conn.Query<ReadStock>("sp_UsedCarsGetData", param, commandType: CommandType.StoredProcedure).AsList()[0];
                 }
             }
             catch (Exception)
@@ -86,17 +86,17 @@ namespace DAL
                 throw;
             }
 
-            return stockDetail;
+            //return stockDetail;
         }
 
         public IEnumerable<ESGetDetail> GetAllStockDetail()
         {
-            IEnumerable<ESGetDetail> stockDetail;
-            using (IDbConnection conn = new MySqlConnection(_connString))
+            //IEnumerable<ESGetDetail> stockDetail;
+            using (IDbConnection _conn = new MySqlConnection(_connString))
             {
-                stockDetail = conn.Query<ESGetDetail>("sp_AllUsedCarsGetData", commandType: CommandType.StoredProcedure);
+                return _conn.Query<ESGetDetail>("sp_AllUsedCarsGetData", commandType: CommandType.StoredProcedure);
             }
-            return stockDetail;
+            //return stockDetail;
         }
     }
 }

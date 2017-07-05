@@ -45,7 +45,7 @@ namespace Cache
             try
             {
 
-                getUpdatedData = _dataAccessLayer.EditDbStock(stockId, stock);
+                getUpdatedData = _dataAccessLayer.UpdateDbStock(stockId, stock);
                 using (MemcachedClient client = new MemcachedClient("memcached"))
                 {
                     client.Store(StoreMode.Set, cacheKey, getUpdatedData, DateTime.Now.AddMinutes(60));
@@ -98,9 +98,9 @@ namespace Cache
             return stockId;
         }
 
-        public string CreateKey(int carId)
+        public string CreateKey(int stockId)
         {
-            return string.Format("UsedCar_{0}", carId);
+            return string.Format("UsedCar_{0}", stockId);
         }
 
         private ESGetDetail ConvertCachetoESData(ReadStock getUpdatedData)

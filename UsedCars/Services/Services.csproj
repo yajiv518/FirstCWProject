@@ -171,6 +171,7 @@
     <Content Include="Content\PagedList.css" />
     <Content Include="CSS\carDetail.css" />
     <Content Include="CSS\frontpage.css" />
+    <Content Include="CSS\frontPage1.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />

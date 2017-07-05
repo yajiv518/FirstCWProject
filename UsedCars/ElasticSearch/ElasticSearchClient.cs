@@ -13,8 +13,7 @@ namespace ElasticSearch
     {
         private ElasticClient _client = ElasticClientInstance.GetInstance();
         private QueryContainer _queryStore;
-        private MatchAllQuery _allStocks = new MatchAllQuery();
-        private IEnumerable<ESGetDetail> _getAllStocks;
+        //private MatchAllQuery _allStocks = new MatchAllQuery();
         private TermQuery _stocksByCity = new TermQuery()
         {
             Field = "city"
@@ -26,22 +25,20 @@ namespace ElasticSearch
 
         private SearchRequest MakeSearchRequest(int page, int pageSize, QueryContainer query)
         {
-            var searchRequest = new SearchRequest
+            return new SearchRequest
             {
                 From = page,
                 Size = pageSize,
                 Query = query
             };
-            return searchRequest;
         }
 
         public IEnumerable<ESGetDetail> GetAllStocks(int page, int pageSize)
         {
-            _queryStore = _allStocks;
+            _queryStore = new MatchAllQuery();
             var searchRequest = MakeSearchRequest(page, pageSize, _queryStore);
             var searchResults = _client.Search<ESGetDetail>(searchRequest);
-            _getAllStocks = searchResults.Documents.ToArray<ESGetDetail>();
-            return _getAllStocks;
+            return searchResults.Documents.ToArray<ESGetDetail>();
         }
 
         public IEnumerable<ESGetDetail> GetStocksByCity(string cityName, int page, int pageSize)
@@ -50,8 +47,7 @@ namespace ElasticSearch
             _queryStore = _stocksByCity;
             var searchRequest = MakeSearchRequest(page, pageSize, _queryStore);
             var searchResults = _client.Search<ESGetDetail>(searchRequest);
-            _getAllStocks = searchResults.Documents.ToArray<ESGetDetail>();
-            return _getAllStocks;
+            return searchResults.Documents.ToArray<ESGetDetail>();
         }
 
         public IEnumerable<ESGetDetail> GetStocksByBudget(string minValue, string maxValue, int page, int pageSize)
@@ -61,8 +57,7 @@ namespace ElasticSearch
             _queryStore = _stocksByBudget;
             var searchRequest = MakeSearchRequest(page, pageSize, _queryStore);
             var searchResults = _client.Search<ESGetDetail>(searchRequest);
-            _getAllStocks = searchResults.Documents.ToArray<ESGetDetail>();
-            return _getAllStocks;
+            return searchResults.Documents.ToArray<ESGetDetail>();
         }
 
         public IEnumerable<ESGetDetail> GetStocksByCityAndPrice(string cityName, string minValue, string maxValue, int page, int pageSize)
@@ -73,18 +68,16 @@ namespace ElasticSearch
             _queryStore = _stocksByCity && _stocksByBudget;
             var searchRequest = MakeSearchRequest(page, pageSize, _queryStore);
             var searchResults = _client.Search<ESGetDetail>(searchRequest);
-            _getAllStocks = searchResults.Documents.ToArray<ESGetDetail>();
-            return _getAllStocks;
+            return searchResults.Documents.ToArray<ESGetDetail>();
         }
 
 
         public void CreateESStock(ESGetDetail createdStock)
         {
-            int id = createdStock.ID;
             _client.Index(createdStock, i => i
                 .Index("stockdata_g3_1")
                 .Type("esgetdetail")
-                .Id(id.ToString())
+                .Id(createdStock.ID.ToString())
                      );
         }
 

@@ -14,6 +14,7 @@ namespace DTOs
         public SearchResultDTO()
         {
             PageSize = 2;
+            PreviousPageId = -1;
         }
     }
 }

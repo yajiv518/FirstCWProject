@@ -12,7 +12,7 @@ namespace Interfaces
         ReadStock CreateDbStock(T a);
         ReadStock ReadDbStock(int id);
         void DeleteDbStock(int id);
-        ReadStock EditDbStock(int id, T a);
+        ReadStock UpdateDbStock(int id, T a);
         IEnumerable<ESGetDetail> GetAllStockDetail();
     }
 }
